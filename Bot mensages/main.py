@@ -1,13 +1,18 @@
+import os
 import discord
+from discord.ext import commands
+from credentials import secrets
+
 intents = discord.Intents.default()
+intents.message_content = True
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+api_key = secrets.get('API_KEY')
 
-    async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
-    
-    
-client = discord.Client(intents=discord.Intents.default())
-client.run('MTE1MTk3NjI3MDM5NDA1MjczOQ.G4Rl-Y.s7talVoW5jH8A3oFM3TPZkbfzsekfIZ9XPofkw')
+bot = commands.Bot(command_prefix='/', intents=intents)
+
+ 
+@bot.command()   
+async def oi(ctx):
+    await ctx.send('eai')
+        
+bot.run(api_key)
